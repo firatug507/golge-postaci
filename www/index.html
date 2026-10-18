@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#0b0f2e">
+<title>Gölge Postacı</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="hud" class="hidden">
+  <div class="hud-top">
+    <div class="hud-left">
+      <span class="pill" title="Teslim edilen mektup"><svg viewBox="0 0 24 24" class="ico"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M3 6l9 7 9-7"/></svg><b id="hudLetters">0</b></span>
+      <span class="pill" title="Pul"><svg viewBox="0 0 24 24" class="ico stamp"><path d="M5 3h14v18H5z"/><circle cx="12" cy="11" r="3.2"/></svg><b id="hudStamps">0</b></span>
+    </div>
+    <div class="hud-right">
+      <span id="hudDist" class="dist">0 m</span>
+      <button id="btnPause" class="round" aria-label="Duraklat"><svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
+    </div>
+  </div>
+  <div id="dawn"><span>Şafağa</span><div class="bar"><i id="dawnFill"></i></div><span id="dawnTime">2:00</span></div>
+</div>
+
+<div id="hint" class="hidden"><div>Basılı tut: halatı at</div><div>Bırak: uç</div><div class="hand"></div></div>
+<div id="toast"></div>
+
+<section id="menu" class="screen">
+  <button id="btnMute" class="round corner" aria-label="Ses"></button>
+  <div class="title-wrap">
+    <div class="logo-env"></div>
+    <h1>Gölge Postacı</h1>
+    <p class="sub">Söylenemeyen sözleri, güneş doğmadan sahiplerine ulaştır.</p>
+  </div>
+  <div class="menu-btns">
+    <button id="btnStart" class="big primary">Başla</button>
+    <button id="btnLetters" class="big">Mektuplar <small id="menuLetterCount">0/10</small></button>
+    <button id="btnShop" class="big">Mağaza</button>
+  </div>
+  <div class="menu-stats"><span>En iyi: <b id="menuBest">0 m</b></span><span>Pul: <b id="menuStamps">0</b></span></div>
+  <div class="district">Mahalle: <b>Yağmurlu Çatılar</b></div>
+  <div class="ver">v0.1</div>
+</section>
+
+<section id="letters" class="screen hidden">
+  <header><button class="back" data-back>‹</button><h2>Mektuplar</h2><span id="lettersCount" class="count">0/10</span></header>
+  <p class="note">Yağmurlu Çatılar'daki posta kutularına ulaştıkça yeni mektuplar açılır.</p>
+  <div id="letterGrid" class="grid"></div>
+</section>
+
+<section id="shop" class="screen hidden">
+  <header><button class="back" data-back>‹</button><h2>Mağaza</h2><span class="count"><span id="shopStamps">0</span> pul</span></header>
+  <div id="shopPreview"></div>
+  <h3 class="sec">Pelerin</h3>
+  <div id="shopCapes" class="list"></div>
+  <h3 class="sec">Halat</h3>
+  <div id="shopRopes" class="list"></div>
+  <p class="note">Pulları posta kutularına mektup teslim ederek ve havada pul toplayarak kazanırsın. Reklam yok, gerçek para yok.</p>
+</section>
+
+<section id="pause" class="screen dim hidden">
+  <h2>Duraklatıldı</h2>
+  <div class="menu-btns">
+    <button id="btnResume" class="big primary">Devam</button>
+    <button id="btnMute2" class="big">Ses: Açık</button>
+    <button id="btnQuit" class="big">Ana menü</button>
+  </div>
+</section>
+
+<section id="over" class="screen dim hidden">
+  <h2 id="overTitle">Düştün!</h2>
+  <p id="overSub" class="sub"></p>
+  <div class="stats">
+    <div><span>Mesafe</span><b id="overDist">0 m</b></div>
+    <div><span>Mektup</span><b id="overLetters">0</b></div>
+    <div><span>Pul</span><b id="overStamps">+0</b></div>
+  </div>
+  <div id="overBest" class="best"></div>
+  <div id="overNew" class="newletters"></div>
+  <div class="menu-btns">
+    <button id="btnRetry" class="big primary">Tekrar</button>
+    <button id="btnHome" class="big">Ana menü</button>
+  </div>
+</section>
+
+<div id="letterModal" class="modal hidden">
+  <div class="paper">
+    <div class="seal"></div>
+    <h3 id="lmTitle"></h3>
+    <p id="lmBody"></p>
+    <div class="sig">Yağmurlu Çatılar · Gece postası</div>
+    <button id="lmClose" class="big primary">Kapat</button>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>

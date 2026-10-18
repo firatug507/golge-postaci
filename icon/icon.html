@@ -1,0 +1,22 @@
+<!doctype html><body style="margin:0;background:transparent"><canvas id="c"></canvas><script>
+function draw(size, adaptive){
+  const c=document.getElementById('c'); c.width=c.height=size; const x=c.getContext('2d'); x.clearRect(0,0,size,size);
+  const S=size/108; x.save(); x.scale(S,S);
+  if(!adaptive){ // legacy: rounded square background, content scaled into it
+    x.save(); x.beginPath(); const r=22; x.moveTo(r,4);x.arcTo(104,4,104,104,r);x.arcTo(104,104,4,104,r);x.arcTo(4,104,4,4,r);x.arcTo(4,4,104,4,r);x.closePath(); x.clip();
+    const g=x.createLinearGradient(0,0,0,108); g.addColorStop(0,'#0b0f2e'); g.addColorStop(1,'#26306e'); x.fillStyle=g; x.fillRect(0,0,108,108);
+  }
+  // moon
+  const mg=x.createRadialGradient(70,36,6,70,36,30); mg.addColorStop(0,'rgba(255,214,140,.45)'); mg.addColorStop(1,'rgba(255,214,140,0)'); x.fillStyle=mg; x.fillRect(30,0,78,70);
+  x.fillStyle='#f7d891'; x.beginPath(); x.arc(70,36,13,0,7); x.fill();
+  // rooftops
+  x.fillStyle='#070920'; x.fillRect(18,78,30,30); x.fillRect(58,72,34,36); x.fillRect(64,64,7,10);
+  // rope + anchor
+  x.strokeStyle='#d4dcff'; x.lineWidth=1.6; x.beginPath(); x.moveTo(36,30); x.lineTo(50,58); x.stroke(); x.beginPath(); x.arc(36,30,2.6,0,7); x.stroke();
+  // envelope (glowing satchel letter)
+  const eg=x.createRadialGradient(54,64,2,54,64,22); eg.addColorStop(0,'rgba(255,160,50,.75)'); eg.addColorStop(1,'rgba(255,160,50,0)'); x.fillStyle=eg; x.fillRect(30,40,48,48);
+  x.fillStyle='#ffb04a'; x.fillRect(43,57,22,15); x.strokeStyle='#8a3f0c'; x.lineWidth=1.6; x.beginPath(); x.moveTo(43,57); x.lineTo(54,66); x.lineTo(65,57); x.stroke();
+  if(!adaptive) x.restore();
+  x.restore(); return c.toDataURL('image/png');
+}
+</script></body>

@@ -1,0 +1,9 @@
+keys/
+build/
+dist/
+test/node_modules
+icon/node_modules
+shots/
+*.jks
+*.keystore
+keystore.properties
